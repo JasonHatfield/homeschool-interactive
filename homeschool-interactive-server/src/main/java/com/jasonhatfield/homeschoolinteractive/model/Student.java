@@ -4,6 +4,10 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import java.util.Date;
 
+/**
+ * Represents a student in the homeschool interactive system.
+ * This class contains information about the student such as their ID, grade level, first name, and last name.
+ */
 @Entity
 @Table(name = "Students")
 public class Student {

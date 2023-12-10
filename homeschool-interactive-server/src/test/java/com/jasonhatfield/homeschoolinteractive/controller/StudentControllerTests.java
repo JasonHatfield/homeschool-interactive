@@ -22,6 +22,10 @@ import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+/**
+ * This class contains unit tests for the StudentController class.
+ * It uses Mockito and MockMvc to mock dependencies and perform HTTP requests.
+ */
 @ExtendWith(MockitoExtension.class)
 public class StudentControllerTests {
 

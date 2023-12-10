@@ -29,6 +29,11 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.doThrow;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 
+/**
+ * This class contains unit tests for the AssignmentController class.
+ * It uses Mockito and MockMvc to mock dependencies and perform HTTP requests.
+ * Each test method tests a specific functionality of the AssignmentController.
+ */
 @ExtendWith(MockitoExtension.class)
 public class AssignmentControllerTests {
 
@@ -50,12 +55,10 @@ public class AssignmentControllerTests {
     @Test
     public void testCreateAssignment() throws Exception {
         Assignment newAssignment = new Assignment();
-        // Populate newAssignment with test data
         newAssignment.setTitle("Sample Assignment");
         newAssignment.setDescription("Description of the Assignment");
         newAssignment.setDueDate(new Date()); // Set a valid date
         newAssignment.setStatus(AssignmentStatus.Incomplete); // Set a valid status
-        // Ensure any other required fields are set...
 
         given(assignmentService.saveAssignment(any(Assignment.class))).willReturn(newAssignment);
 
@@ -82,7 +85,6 @@ public class AssignmentControllerTests {
         Long id = 1L;
         Assignment assignment = new Assignment();
         assignment.setAssignmentId(id); // Set assignmentId
-        // Populate other properties...
 
         given(assignmentService.getAssignmentById(id)).willReturn(Optional.of(assignment));
 
@@ -121,7 +123,6 @@ public class AssignmentControllerTests {
 
     @Test
     public void testGetAssignmentsBetweenDates() throws Exception {
-        // Assuming startDate and endDate are correctly formatted
         mockMvc.perform(get("/assignments/range")
                 .param("startDate", "2023-01-01")
                 .param("endDate", "2023-01-31"))

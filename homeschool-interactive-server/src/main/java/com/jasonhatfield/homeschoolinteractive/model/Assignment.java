@@ -4,6 +4,10 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import java.util.Date;
 
+/**
+ * Represents an assignment in the homeschool interactive system.
+ * An assignment is a task or piece of work that is assigned to a student for a specific subject.
+ */
 @Entity
 @Table(name = "Assignments")
 public class Assignment {
