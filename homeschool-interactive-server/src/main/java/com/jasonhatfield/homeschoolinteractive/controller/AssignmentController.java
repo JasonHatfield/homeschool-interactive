@@ -4,6 +4,7 @@ import com.jasonhatfield.homeschoolinteractive.model.Assignment;
 import com.jasonhatfield.homeschoolinteractive.model.AssignmentStatus;
 import com.jasonhatfield.homeschoolinteractive.service.AssignmentService;
 
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -58,20 +59,25 @@ public class AssignmentController {
 
     @DeleteMapping("/{assignmentId}")
     public ResponseEntity<?> deleteAssignment(@PathVariable Long assignmentId) {
-        assignmentService.deleteAssignment(assignmentId);
-        return ResponseEntity.ok().build();
+        try {
+            assignmentService.deleteAssignment(assignmentId);
+            return ResponseEntity.ok().build();
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @PutMapping("/{assignmentId}")
     public ResponseEntity<Assignment> updateAssignment(@PathVariable Long assignmentId,
-                                                       @Valid @RequestBody Assignment assignmentDetails) {
+            @Valid @RequestBody Assignment assignmentDetails) {
         return assignmentService.updateAssignment(assignmentId, assignmentDetails)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
+
     @PutMapping("/{assignmentId}/status")
     public ResponseEntity<Assignment> updateAssignmentStatus(@PathVariable Long assignmentId,
-                                                             @RequestParam("status") String statusValue) {
+            @RequestParam("status") String statusValue) {
         try {
             AssignmentStatus status = AssignmentStatus.valueOf(statusValue);
             return assignmentService.updateAssignmentStatus(assignmentId, status)
@@ -81,5 +87,5 @@ public class AssignmentController {
             return ResponseEntity.badRequest().build();
         }
     }
-    
+
 }

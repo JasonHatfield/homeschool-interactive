@@ -1,6 +1,5 @@
 package com.jasonhatfield.homeschoolinteractive.model;
 
-import io.micrometer.common.lang.Nullable;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 
@@ -12,7 +11,7 @@ public class Subject {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long subjectId;
 
-    @Nullable
+    @NotNull(message = "Name cannot be null")
     @Size(min = 1, max = 255, message = "Name must be between 1 and 255 characters")
     @Column(nullable = false, length = 255)
     private String name;

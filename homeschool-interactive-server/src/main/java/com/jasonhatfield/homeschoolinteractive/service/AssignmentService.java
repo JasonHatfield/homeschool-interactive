@@ -4,6 +4,9 @@ import com.jasonhatfield.homeschoolinteractive.model.Assignment;
 import com.jasonhatfield.homeschoolinteractive.model.AssignmentStatus;
 import com.jasonhatfield.homeschoolinteractive.repository.AssignmentRepository;
 import com.jasonhatfield.homeschoolinteractive.repository.SubjectRepository;
+
+import jakarta.persistence.EntityNotFoundException;
+
 import org.springframework.stereotype.Service;
 
 import java.util.Calendar;
@@ -35,6 +38,9 @@ public class AssignmentService {
     }
 
     public void deleteAssignment(Long assignmentId) {
+        if (!assignmentRepository.existsById(assignmentId)) {
+            throw new EntityNotFoundException("Assignment not found with ID: " + assignmentId);
+        }
         assignmentRepository.deleteById(assignmentId);
     }
 
