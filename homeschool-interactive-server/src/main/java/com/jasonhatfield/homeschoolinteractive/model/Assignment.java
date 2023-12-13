@@ -2,16 +2,23 @@ package com.jasonhatfield.homeschoolinteractive.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.Date;
 
 /**
  * Represents an assignment in the homeschool interactive system.
  * An assignment is a task or piece of work that is assigned to a student for a specific subject.
  */
+
+@Getter
+@Setter
 @Entity
 @Table(name = "Assignments")
 public class Assignment {
 
+    // Getters and Setters
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long assignmentId;
@@ -40,52 +47,4 @@ public class Assignment {
     @Column(nullable = false)
     private AssignmentStatus status;
 
-    // Getters and Setters
-    public Long getAssignmentId() {
-        return assignmentId;
-    }
-
-    public void setAssignmentId(Long assignmentId) {
-        this.assignmentId = assignmentId;
-    }
-
-    public Subject getSubject() {
-        return subject;
-    }
-
-    public void setSubject(Subject subject) {
-        this.subject = subject;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Date getDueDate() {
-        return dueDate;
-    }
-
-    public void setDueDate(Date dueDate) {
-        this.dueDate = dueDate;
-    }
-
-    public AssignmentStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(AssignmentStatus status) {
-        this.status = status;
-    }
 }
