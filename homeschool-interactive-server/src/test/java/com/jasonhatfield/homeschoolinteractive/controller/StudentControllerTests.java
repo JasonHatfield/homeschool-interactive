@@ -34,7 +34,7 @@ public class StudentControllerTests {
     private StudentService studentService;
     @InjectMocks
     private StudentController studentController;
-    private ObjectMapper objectMapper = new ObjectMapper();
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
     @BeforeEach
     void setUp() {
@@ -94,7 +94,7 @@ public class StudentControllerTests {
 
     @Test
     public void testDeleteStudent() throws Exception {
-        Long id = 1L;
+        long id = 1L;
         mockMvc.perform(delete("/students/" + id))
                 .andExpect(status().isOk());
     }
@@ -111,7 +111,7 @@ public class StudentControllerTests {
 
     @Test
     public void testUpdateStudentWithInvalidData() throws Exception {
-        Long id = 1L;
+        long id = 1L;
         Student invalidStudent = new Student(); // Missing firstName, lastName, and gradeLevel
 
         mockMvc.perform(put("/students/" + id)

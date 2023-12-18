@@ -34,7 +34,7 @@ public class SubjectControllerTests {
     private SubjectService subjectService;
     @InjectMocks
     private SubjectController subjectController;
-    private ObjectMapper objectMapper = new ObjectMapper();
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
     @BeforeEach
     void setUp() {
@@ -107,7 +107,7 @@ public class SubjectControllerTests {
 
     @Test
     public void testUpdateSubjectWithInvalidData() throws Exception {
-        Long id = 1L;
+        long id = 1L;
         Subject invalidSubject = new Subject(); // Name is missing
 
         mockMvc.perform(put("/subjects/" + id)
@@ -118,7 +118,7 @@ public class SubjectControllerTests {
 
     @Test
     public void testDeleteSubject() throws Exception {
-        Long id = 1L;
+        long id = 1L;
         mockMvc.perform(delete("/subjects/" + id))
                 .andExpect(status().isOk());
     }

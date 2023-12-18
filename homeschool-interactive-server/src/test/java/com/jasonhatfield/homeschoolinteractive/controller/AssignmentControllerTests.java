@@ -45,7 +45,7 @@ public class AssignmentControllerTests {
     @InjectMocks
     private AssignmentController assignmentController;
 
-    private ObjectMapper objectMapper = new ObjectMapper();
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
     @BeforeEach
     void setUp() {
@@ -116,7 +116,7 @@ public class AssignmentControllerTests {
 
     @Test
     public void testDeleteAssignment() throws Exception {
-        Long id = 1L;
+        long id = 1L;
         mockMvc.perform(delete("/assignments/" + id))
                 .andExpect(status().isOk());
     }
