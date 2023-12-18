@@ -8,7 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * This class is responsible for starting the application.
  */
 @SpringBootApplication
-public class app {
+public class App {
 
     /**
      * The main method of the application.
@@ -16,7 +16,7 @@ public class app {
      * @param args The command line arguments passed to the application.
      */
     public static void main(String[] args) {
-        SpringApplication.run(app.class, args);
+        SpringApplication.run(App.class, args);
     }
 
 }

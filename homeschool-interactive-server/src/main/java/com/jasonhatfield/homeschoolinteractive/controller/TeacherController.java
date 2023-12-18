@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/teacher")
+@RequestMapping("/teachers")
 public class TeacherController {
 
     // Example endpoint
@@ -15,5 +15,4 @@ public class TeacherController {
         return "Teacher Information";
     }
 
-    // Add more methods as needed
 }
