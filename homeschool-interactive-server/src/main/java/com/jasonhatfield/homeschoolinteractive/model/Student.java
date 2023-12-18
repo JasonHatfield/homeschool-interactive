@@ -8,7 +8,7 @@ import lombok.Setter;
 import java.util.Date;
 
 /**
- * Represents a student in the homeschool interactive system.
+ * Represents a student in the Homeschool Interactive system.
  * This class contains information about the student such as their ID, grade level, first name, and last name.
  */
 
