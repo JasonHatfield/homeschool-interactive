@@ -30,4 +30,16 @@ public class UserController {
         User savedUser = userService.registerUser(user);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedUser);
     }
+
+    @DeleteMapping("/delete/{username}")
+    public ResponseEntity<?> deleteUser(@PathVariable String username) {
+        if (!userService.existsByUsername(username)) {
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body("Error: Username not found!");
+        }
+
+        userService.deleteUserByUsername(username);
+        return ResponseEntity.status(HttpStatus.OK).body("User deleted successfully.");
+    }
 }

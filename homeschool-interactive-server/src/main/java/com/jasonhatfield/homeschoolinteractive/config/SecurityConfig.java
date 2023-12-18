@@ -28,7 +28,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authz -> authz
                         .requestMatchers("/users/register").permitAll()
                         .requestMatchers("/students/**").hasRole("STUDENT")
-                        .requestMatchers("/teachers/**", "/admin/**").hasRole("TEACHER")
+                        .requestMatchers("/teachers/**", "/admin/**", "/users/delete/**").hasRole("TEACHER")
                         .anyRequest().authenticated()
                 )
                 .httpBasic(httpBasic -> {});

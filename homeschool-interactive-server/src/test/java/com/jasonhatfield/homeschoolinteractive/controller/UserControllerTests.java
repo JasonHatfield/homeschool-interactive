@@ -15,6 +15,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -43,6 +44,18 @@ public class UserControllerTests {
                         .content(objectMapper.writeValueAsString(newUser)))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.username").value("newUser"));
+    }
+
+    @Test
+    public void testDeleteUser() throws Exception {
+        String username = "existingUser";
+        given(userService.existsByUsername(username)).willReturn(true);
+
+        mockMvc.perform(delete("/users/delete/" + username))
+                .andExpect(status().isOk())
+                .andExpect(content().string("User deleted successfully."));
+
+        verify(userService).deleteUserByUsername(username);
     }
 
 }
