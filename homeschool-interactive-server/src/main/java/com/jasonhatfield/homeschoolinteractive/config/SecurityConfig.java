@@ -20,11 +20,13 @@ public class SecurityConfig {
     public SecurityConfig(CustomUserDetailsService userDetailsService) {
         this.userDetailsService = userDetailsService;
     }
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authz -> authz
+                        .requestMatchers("/users/register").permitAll()
                         .requestMatchers("/students/**").hasRole("STUDENT")
                         .requestMatchers("/teachers/**", "/admin/**").hasRole("TEACHER")
                         .anyRequest().authenticated()
