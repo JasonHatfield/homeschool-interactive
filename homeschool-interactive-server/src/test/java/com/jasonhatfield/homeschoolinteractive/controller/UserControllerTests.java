@@ -10,6 +10,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
@@ -48,6 +49,19 @@ public class UserControllerTests {
 
     @Test
     public void testDeleteUser() throws Exception {
+        String username = "existingUser";
+        given(userService.existsByUsername(username)).willReturn(true);
+
+        mockMvc.perform(delete("/users/delete/" + username))
+                .andExpect(status().isOk())
+                .andExpect(content().string("User deleted successfully."));
+
+        verify(userService).deleteUserByUsername(username);
+    }
+
+    @Test
+    @WithMockUser(username = "teacher", roles = {"TEACHER"})
+    public void testDeleteUserAsTeacher() throws Exception {
         String username = "existingUser";
         given(userService.existsByUsername(username)).willReturn(true);
 
