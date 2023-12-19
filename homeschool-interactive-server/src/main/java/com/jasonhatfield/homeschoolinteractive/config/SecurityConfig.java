@@ -26,7 +26,7 @@ public class SecurityConfig {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authz -> authz
-                        .requestMatchers("/users/register").permitAll()
+                        .requestMatchers("/users/register", "/login").permitAll()
                         .requestMatchers("/students/**").hasRole("STUDENT")
                         .requestMatchers("/teachers/**", "/admin/**", "/users/delete/**").hasRole("TEACHER")
                         .anyRequest().authenticated()
