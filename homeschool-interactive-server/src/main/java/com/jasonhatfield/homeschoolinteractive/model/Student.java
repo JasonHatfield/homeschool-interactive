@@ -18,7 +18,6 @@ import java.util.Date;
 @Table(name = "Students")
 public class Student {
 
-    // Getters and Setters
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long studentId;
