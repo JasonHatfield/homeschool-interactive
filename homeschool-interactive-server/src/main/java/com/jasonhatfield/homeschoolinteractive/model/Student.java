@@ -20,7 +20,8 @@ public class Student {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long studentId;
+    @Column(name = "student_id") // Ensure the name matches "id"
+    private Long id; // Updated to "id" to match the corrected field name
 
     @Column(name = "user_id")
     private Long userId;

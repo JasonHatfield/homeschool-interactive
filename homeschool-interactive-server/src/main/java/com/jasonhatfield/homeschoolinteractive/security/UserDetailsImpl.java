@@ -2,7 +2,6 @@ package com.jasonhatfield.homeschoolinteractive.security;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
 import java.util.Collection;
 
 public record UserDetailsImpl(String username, String password,
@@ -10,7 +9,8 @@ public record UserDetailsImpl(String username, String password,
                               boolean accountNonExpired,
                               boolean accountNonLocked,
                               boolean credentialsNonExpired,
-                              boolean enabled) implements UserDetails {
+                              boolean enabled,
+                              Long userId) implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -45,5 +45,9 @@ public record UserDetailsImpl(String username, String password,
     @Override
     public boolean isEnabled() {
         return enabled;
+    }
+
+    public Long getUserId() {
+        return userId;
     }
 }

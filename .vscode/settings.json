@@ -1,5 +1,12 @@
 {
   "java.compile.nullAnalysis.mode": "automatic",
-  "cSpell.words": ["datepicker", "fontawesome", "fortawesome", "webfonts"],
-  "java.configuration.updateBuildConfiguration": "interactive"
+  "cSpell.words": [
+    "databind",
+    "datepicker",
+    "fasterxml",
+    "fontawesome",
+    "fortawesome",
+    "webfonts"
+  ],
+  "java.configuration.updateBuildConfiguration": "automatic"
 }

@@ -23,10 +23,8 @@ public class CustomUserDetailsService implements UserDetailsService {
         User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found with username: " + username));
 
-        // Prefix the role with "ROLE_"
         String roleWithPrefix = "ROLE_" + user.getRole();
 
-        // Create UserDetailsImpl with prefixed role
         return new UserDetailsImpl(
                 user.getUsername(),
                 user.getPassword(),
@@ -34,7 +32,8 @@ public class CustomUserDetailsService implements UserDetailsService {
                 true, // accountNonExpired
                 true, // accountNonLocked
                 true, // credentialsNonExpired
-                true  // enabled
+                true,  // enabled
+                user.getUserId() // Set userId here
         );
     }
 }

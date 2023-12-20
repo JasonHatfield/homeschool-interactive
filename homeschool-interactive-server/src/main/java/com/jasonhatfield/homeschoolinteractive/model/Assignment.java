@@ -47,4 +47,8 @@ public class Assignment {
     @Column(nullable = false)
     private AssignmentStatus status;
 
+    @ManyToOne
+    @JoinColumn(name = "student_id", nullable = false)
+    private Student student;
+
 }

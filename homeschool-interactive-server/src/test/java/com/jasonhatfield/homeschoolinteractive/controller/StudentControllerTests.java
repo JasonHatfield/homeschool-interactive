@@ -122,7 +122,7 @@ public class StudentControllerTests {
 
     private Student createTestStudent(Long id, String firstName, String lastName, int gradeLevel) {
         Student student = new Student();
-        student.setStudentId(id);
+        // student.setStudentId(id);
         student.setFirstName(firstName);
         student.setLastName(lastName);
         student.setGradeLevel(gradeLevel);

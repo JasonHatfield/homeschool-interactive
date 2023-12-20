@@ -18,4 +18,3 @@ public class JwtUtil {
 
     // Additional methods for token validation can be added here
 }
-

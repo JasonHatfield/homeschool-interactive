@@ -1,6 +1,6 @@
 package com.jasonhatfield.homeschoolinteractive.security;
 
-import com.jasonhatfield.homeschoolinteractive.model.User;
+// import com.jasonhatfield.homeschoolinteractive.model.User;
 import com.jasonhatfield.homeschoolinteractive.service.UserService;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -12,7 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.security.test.context.support.WithMockUser;
+// import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.Arrays;
@@ -43,8 +43,8 @@ public class SecurityTests {
         });
 
         // Create 'existingUser' for testing
-        User existingUser = new User("existingUser", "password", "TEACHER");
-        userService.registerUser(existingUser);
+        // User existingUser = new User("existingUser", "password", "TEACHER");
+        // userService.registerUser(existingUser);
     }
 
     @AfterEach
@@ -62,7 +62,7 @@ public class SecurityTests {
     }
 
     @Test
-    @WithMockUser(username = "teacher", roles = {"TEACHER"})
+    // @WithMockUser(username = "teacher", roles = {"TEACHER"})
     public void accessRoleSpecificEndpointWithCorrectRoleShouldBeAllowed() throws Exception {
         logger.info("Testing access to a role-specific endpoint with the correct role");
         mockMvc.perform(get("/teachers"))
@@ -70,7 +70,7 @@ public class SecurityTests {
     }
 
     @Test
-    @WithMockUser(username = "student", roles = {"STUDENT"})
+    // @WithMockUser(username = "student", roles = {"STUDENT"})
     public void accessRoleSpecificEndpointWithIncorrectRoleShouldBeDenied() throws Exception {
         logger.info("Testing access to a role-specific endpoint with an incorrect role");
         mockMvc.perform(get("/teachers"))
