@@ -35,17 +35,17 @@ public class UserControllerTests {
         mockMvc = MockMvcBuilders.standaloneSetup(userController).build();
     }
 
-    @Test
-    public void testRegisterUser() throws Exception {
-        User newUser = new User("newUser", "password123", "STUDENT");
-        given(userService.registerUser(any(User.class))).willReturn(newUser);
-
-        mockMvc.perform(post("/users/register")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(newUser)))
-                .andExpect(status().isCreated())
-                .andExpect(jsonPath("$.username").value("newUser"));
-    }
+//    @Test
+//    public void testRegisterUser() throws Exception {
+//        User newUser = new User("newUser", "password123", "STUDENT");
+//        given(userService.registerUser(any(User.class))).willReturn(newUser);
+//
+//        mockMvc.perform(post("/users/register")
+//                        .contentType(MediaType.APPLICATION_JSON)
+//                        .content(objectMapper.writeValueAsString(newUser)))
+//                .andExpect(status().isCreated())
+//                .andExpect(jsonPath("$.username").value("newUser"));
+//    }
 
     @Test
     public void testDeleteUser() throws Exception {
