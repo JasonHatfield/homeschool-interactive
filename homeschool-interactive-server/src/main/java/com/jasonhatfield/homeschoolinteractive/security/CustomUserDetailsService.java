@@ -3,7 +3,6 @@ package com.jasonhatfield.homeschoolinteractive.security;
 import com.jasonhatfield.homeschoolinteractive.model.User;
 import com.jasonhatfield.homeschoolinteractive.repository.UserRepository;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -20,14 +19,22 @@ public class CustomUserDetailsService implements UserDetailsService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public UserDetailsImpl loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found with username: " + username));
 
-        return new org.springframework.security.core.userdetails.User(
+        // Prefix the role with "ROLE_"
+        String roleWithPrefix = "ROLE_" + user.getRole();
+
+        // Create UserDetailsImpl with prefixed role
+        return new UserDetailsImpl(
                 user.getUsername(),
                 user.getPassword(),
-                Collections.singletonList(new SimpleGrantedAuthority(user.getRole())) // Use the role from the User entity
+                Collections.singletonList(new SimpleGrantedAuthority(roleWithPrefix)),
+                true, // accountNonExpired
+                true, // accountNonLocked
+                true, // credentialsNonExpired
+                true  // enabled
         );
     }
 }
