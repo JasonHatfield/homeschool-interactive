@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/admin")
 public class AdminController {
 
-    // Example endpoint
     @GetMapping()
     public String getAdminInfo() {
         // Replace with actual logic

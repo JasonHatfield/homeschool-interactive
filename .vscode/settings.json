@@ -6,6 +6,7 @@
     "fasterxml",
     "fontawesome",
     "fortawesome",
+    "JSESSIONID",
     "webfonts"
   ],
   "java.configuration.updateBuildConfiguration": "automatic"
