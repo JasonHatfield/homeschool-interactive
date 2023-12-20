@@ -3,6 +3,7 @@ package com.jasonhatfield.homeschoolinteractive.controller;
 import com.jasonhatfield.homeschoolinteractive.dto.AuthResponse;
 import com.jasonhatfield.homeschoolinteractive.dto.LoginRequest;
 import com.jasonhatfield.homeschoolinteractive.security.UserDetailsImpl;
+import com.jasonhatfield.homeschoolinteractive.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -25,8 +26,6 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<?> authenticateUser(@RequestBody LoginRequest loginRequest) {
-        System.out.println("Username: " + loginRequest.getUsername()); // Log for debugging
-        System.out.println("Password: " + loginRequest.getPassword()); // Log for debugging
         try {
             Authentication authentication = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword())
@@ -38,13 +37,12 @@ public class AuthController {
                     .findFirst()
                     .orElse("ROLE_UNKNOWN");
 
-            // Placeholder for token generation
-            String token = "token-placeholder";
+            String token = JwtUtil.generateToken(loginRequest.getUsername());
 
             return ResponseEntity.ok(new AuthResponse(token, role));
         } catch (Exception e) {
-            // Log error details and return an appropriate error response
             return ResponseEntity.status(401).body("Authentication failed: " + e.getMessage());
         }
     }
+
 }
