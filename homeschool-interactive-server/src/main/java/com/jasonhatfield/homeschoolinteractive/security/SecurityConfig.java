@@ -29,8 +29,8 @@ public class SecurityConfig {
             .csrf(AbstractHttpConfigurer::disable)
             .authorizeHttpRequests(authz -> authz
                 .requestMatchers("/api/auth/**", "/api/register").permitAll()
-                .requestMatchers("/students/**").hasAuthority("ROLE_STUDENT")
-                .requestMatchers("/teachers/**", "/admin/**").hasAuthority("ROLE_TEACHER")
+                    .requestMatchers("/students/**").hasAnyAuthority("ROLE_STUDENT", "ROLE_TEACHER")
+                    .requestMatchers("/teachers/**", "/admin/**").hasAuthority("ROLE_TEACHER")
                 .anyRequest().authenticated())
             .httpBasic(Customizer.withDefaults())
             .logout(logout -> logout
