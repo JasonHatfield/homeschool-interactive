@@ -5,10 +5,6 @@ import jakarta.validation.constraints.*;
 import lombok.Getter;
 import lombok.Setter;
 
-/**
- * Represents a subject in the Homeschool Interactive system.
- * Each subject has a unique identifier (subjectId) and a name.
- */
 @Setter
 @Getter
 @Entity

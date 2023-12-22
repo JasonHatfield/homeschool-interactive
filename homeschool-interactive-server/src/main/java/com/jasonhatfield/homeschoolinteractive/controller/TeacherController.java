@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/teachers")
 public class TeacherController {
 
-    // Example endpoint
     @GetMapping()
     public String getTeacherInfo() {
         // Replace with actual logic
