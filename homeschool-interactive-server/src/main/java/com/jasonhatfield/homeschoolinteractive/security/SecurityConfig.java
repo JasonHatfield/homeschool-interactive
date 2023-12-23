@@ -15,13 +15,26 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+/**
+ * Configuration class for security settings in the application.
+ */
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
 
+    /**
+     * Filter for handling JWT authentication requests.
+     */
     @Autowired
     private JwtRequestFilter jwtRequestFilter;
 
+    /**
+     * Configures the security filter chain.
+     *
+     * @param http the HttpSecurity object to configure
+     * @return the configured SecurityFilterChain
+     * @throws Exception if an error occurs during configuration
+     */
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
@@ -46,11 +59,23 @@ public class SecurityConfig {
         return http.build();
     }
 
+    /**
+     * Creates a BCryptPasswordEncoder bean for password encoding.
+     *
+     * @return the BCryptPasswordEncoder bean
+     */
     @Bean
     PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
+    /**
+     * Retrieves the AuthenticationManager bean from AuthenticationConfiguration.
+     *
+     * @param authenticationConfiguration the AuthenticationConfiguration object
+     * @return the AuthenticationManager bean
+     * @throws Exception if an error occurs while retrieving the bean
+     */
     @Bean
     AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();

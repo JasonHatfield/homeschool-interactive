@@ -10,12 +10,20 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+/**
+ * Unit tests for the AdminController class.
+ */
 @WebMvcTest(AdminController.class)
 public class AdminControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
 
+    /**
+     * Test case to verify that the getAdminInfo method returns the correct admin information.
+     *
+     * @throws Exception if an error occurs during the test
+     */
     @Test
     @WithMockUser
     void getAdminInfo_ShouldReturnAdminInformation() throws Exception {

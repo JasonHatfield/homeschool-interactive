@@ -16,6 +16,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+/**
+ * This class contains unit tests for the LogoutController class.
+ */
 @ExtendWith(MockitoExtension.class)
 class LogoutControllerTest {
 
@@ -35,6 +38,11 @@ class LogoutControllerTest {
         mockMvc = MockMvcBuilders.standaloneSetup(logoutController).build();
     }
 
+    /**
+     * Test case to verify the successful logout functionality.
+     *
+     * @throws Exception if an error occurs during the test
+     */
     @Test
     void logout_Success() throws Exception {
         mockMvc.perform(post("/logout"))

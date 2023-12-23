@@ -23,6 +23,9 @@ import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+/**
+ * Unit tests for the AuthController class.
+ */
 @ExtendWith(MockitoExtension.class)
 class AuthControllerTest {
 
@@ -39,6 +42,11 @@ class AuthControllerTest {
         mockMvc = MockMvcBuilders.standaloneSetup(authController).build();
     }
 
+    /**
+     * Test case for successful user authentication.
+     *
+     * @throws Exception if an error occurs during the test
+     */
     @Test
     void authenticateUser_Success() throws Exception {
         UserDetailsImpl userDetails = new UserDetailsImpl(
@@ -61,6 +69,11 @@ class AuthControllerTest {
                 .andExpect(jsonPath("$.token").isString());
     }
 
+    /**
+     * Test case for user authentication with invalid credentials.
+     *
+     * @throws Exception if an error occurs during the test
+     */
     @Test
     void authenticateUser_InvalidCredentials() throws Exception {
         when(authenticationManager.authenticate(any())).thenThrow(new RuntimeException("Invalid credentials"));
@@ -72,6 +85,11 @@ class AuthControllerTest {
                 .andExpect(content().string(containsString("Authentication failed")));
     }
 
+    /**
+     * Test case for user authentication with null input.
+     *
+     * @throws Exception if an error occurs during the test
+     */
     @Test
     void authenticateUser_NullInput() throws Exception {
         mockMvc.perform(post("/api/auth/login")

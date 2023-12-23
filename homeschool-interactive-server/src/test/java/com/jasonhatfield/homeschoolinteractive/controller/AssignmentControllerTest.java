@@ -19,11 +19,13 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Date;
 
-
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+/**
+ * Unit tests for the AssignmentController class.
+ */
 @ExtendWith(MockitoExtension.class)
 class AssignmentControllerTest {
 
@@ -40,6 +42,12 @@ class AssignmentControllerTest {
         mockMvc = MockMvcBuilders.standaloneSetup(assignmentController).build();
     }
 
+    /**
+     * Test case for getting all assignments.
+     * Should return a list of assignments.
+     *
+     * @throws Exception if an error occurs during the test
+     */
     @Test
     void getAllAssignments_ShouldReturnAssignments() throws Exception {
         Assignment mockAssignment = new Assignment();
@@ -51,6 +59,12 @@ class AssignmentControllerTest {
                 .andExpect(jsonPath("$[0].assignmentId").value(mockAssignment.getAssignmentId()));
     }
 
+    /**
+     * Test case for getting assignments between a valid date range.
+     * Should return a list of assignments.
+     *
+     * @throws Exception if an error occurs during the test
+     */
     @Test
     void getAssignmentsBetween_ValidRange_ShouldReturnAssignments() throws Exception {
         List<Assignment> assignments = Collections.singletonList(new Assignment());
@@ -63,6 +77,12 @@ class AssignmentControllerTest {
                 .andExpect(jsonPath("$", org.hamcrest.Matchers.hasSize(1)));
     }
 
+    /**
+     * Test case for getting assignments with an invalid date range.
+     * Should return a bad request status.
+     *
+     * @throws Exception if an error occurs during the test
+     */
     @Test
     void getAssignmentsBetween_InvalidRange_ShouldReturnBadRequest() throws Exception {
         mockMvc.perform(get("/assignments/range")
@@ -70,6 +90,12 @@ class AssignmentControllerTest {
                 .andExpect(status().isBadRequest());
     }
 
+    /**
+     * Test case for getting an assignment by ID when it exists.
+     * Should return the assignment.
+     *
+     * @throws Exception if an error occurs during the test
+     */
     @Test
     void getAssignmentById_Found_ShouldReturnAssignment() throws Exception {
         Long assignmentId = 1L;
@@ -82,6 +108,12 @@ class AssignmentControllerTest {
                 .andExpect(jsonPath("$.assignmentId").value(mockAssignment.getAssignmentId()));
     }
 
+    /**
+     * Test case for getting an assignment by ID when it does not exist.
+     * Should return a not found status.
+     *
+     * @throws Exception if an error occurs during the test
+     */
     @Test
     void getAssignmentById_NotFound_ShouldReturnNotFound() throws Exception {
         Long assignmentId = 1L;
@@ -91,6 +123,12 @@ class AssignmentControllerTest {
                 .andExpect(status().isNotFound());
     }
 
+    /**
+     * Test case for getting assignments by student ID when they exist.
+     * Should return a list of assignments.
+     *
+     * @throws Exception if an error occurs during the test
+     */
     @Test
     void getAssignmentsByStudentId_Found_ShouldReturnAssignments() throws Exception {
         Long studentId = 1L;
@@ -102,6 +140,12 @@ class AssignmentControllerTest {
                 .andExpect(jsonPath("$", org.hamcrest.Matchers.hasSize(1)));
     }
 
+    /**
+     * Test case for getting assignments by student ID when they do not exist.
+     * Should return a not found status.
+     *
+     * @throws Exception if an error occurs during the test
+     */
     @Test
     void getAssignmentsByStudentId_NotFound_ShouldReturnNotFound() throws Exception {
         Long studentId = 1L;
@@ -111,6 +155,12 @@ class AssignmentControllerTest {
                 .andExpect(status().isNotFound());
     }
 
+    /**
+     * Test case for creating a valid assignment.
+     * Should create and return the assignment.
+     *
+     * @throws Exception if an error occurs during the test
+     */
     @Test
     void createAssignment_Valid_ShouldCreateAndReturnAssignment() throws Exception {
         Assignment mockAssignment = new Assignment();
@@ -128,6 +178,12 @@ class AssignmentControllerTest {
                 .andExpect(jsonPath("$.title").value("Test Assignment"));
     }
 
+    /**
+     * Test case for deleting an assignment when it exists.
+     * Should return an OK status.
+     *
+     * @throws Exception if an error occurs during the test
+     */
     @Test
     void deleteAssignment_Exists_ShouldReturnOk() throws Exception {
         Long assignmentId = 1L;
@@ -137,6 +193,12 @@ class AssignmentControllerTest {
                 .andExpect(status().isOk());
     }
 
+    /**
+     * Test case for deleting an assignment when it does not exist.
+     * Should return a not found status.
+     *
+     * @throws Exception if an error occurs during the test
+     */
     @Test
     void deleteAssignment_NotFound_ShouldReturnNotFound() throws Exception {
         Long assignmentId = 1L;
@@ -147,6 +209,12 @@ class AssignmentControllerTest {
                 .andExpect(status().isNotFound());
     }
 
+    /**
+     * Test case for updating an assignment with valid data.
+     * Should return the updated assignment.
+     *
+     * @throws Exception if an error occurs during the test
+     */
     @Test
     void updateAssignment_Valid_ShouldReturnUpdatedAssignment() throws Exception {
         Long assignmentId = 1L;
@@ -165,6 +233,12 @@ class AssignmentControllerTest {
                 .andExpect(jsonPath("$.title").value("Updated Title"));
     }
 
+    /**
+     * Test case for updating the status of an assignment with valid data.
+     * Should return the updated assignment.
+     *
+     * @throws Exception if an error occurs during the test
+     */
     @Test
     void updateAssignmentStatus_Valid_ShouldReturnUpdatedAssignment() throws Exception {
         Long assignmentId = 1L;
@@ -183,6 +257,12 @@ class AssignmentControllerTest {
                 .andExpect(jsonPath("$.status").value("Accepted"));
     }
 
+    /**
+     * Test case for updating the status of an assignment with an invalid status.
+     * Should return a bad request status.
+     *
+     * @throws Exception if an error occurs during the test
+     */
     @Test
     void updateAssignmentStatus_InvalidStatus_ShouldReturnBadRequest() throws Exception {
         mockMvc.perform(put("/assignments/{assignmentId}/status", 1L)

@@ -20,6 +20,9 @@ import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+/**
+ * Unit tests for the StudentController class.
+ */
 @ExtendWith(MockitoExtension.class)
 class StudentControllerTest {
 
@@ -36,6 +39,11 @@ class StudentControllerTest {
         mockMvc = MockMvcBuilders.standaloneSetup(studentController).build();
     }
 
+    /**
+     * Test case for getting all students.
+     *
+     * @throws Exception if an error occurs during the test
+     */
     @Test
     void getAllStudentsTest() throws Exception {
         when(studentService.getAllStudents()).thenReturn(Arrays.asList(new Student(), new Student()));
@@ -46,6 +54,11 @@ class StudentControllerTest {
         verify(studentService).getAllStudents();
     }
 
+    /**
+     * Test case for getting a student by ID successfully.
+     *
+     * @throws Exception if an error occurs during the test
+     */
     @Test
     void getStudentByIdTest_Success() throws Exception {
         Student student = new Student();
@@ -58,6 +71,11 @@ class StudentControllerTest {
         verify(studentService).getStudentById(1L);
     }
 
+    /**
+     * Test case for getting a student by ID when it is not found.
+     *
+     * @throws Exception if an error occurs during the test
+     */
     @Test
     void getStudentByIdTest_NotFound() throws Exception {
         when(studentService.getStudentById(any())).thenReturn(Optional.empty());
@@ -67,6 +85,11 @@ class StudentControllerTest {
         verify(studentService).getStudentById(any());
     }
 
+    /**
+     * Test case for creating a student successfully.
+     *
+     * @throws Exception if an error occurs during the test
+     */
     @Test
     void createStudentTest_Success() throws Exception {
         Student savedStudent = new Student();
@@ -80,7 +103,11 @@ class StudentControllerTest {
                 .andExpect(jsonPath("$.id").value(1L));
     }
 
-
+    /**
+     * Test case for deleting a student successfully.
+     *
+     * @throws Exception if an error occurs during the test
+     */
     @Test
     void deleteStudentTest_Success() throws Exception {
         doNothing().when(studentService).deleteStudent(1L);
@@ -90,6 +117,11 @@ class StudentControllerTest {
         verify(studentService).deleteStudent(1L);
     }
 
+    /**
+     * Test case for updating a student successfully.
+     *
+     * @throws Exception if an error occurs during the test
+     */
     @Test
     void updateStudentTest_Success() throws Exception {
         Student updatedStudent = new Student();
@@ -103,7 +135,11 @@ class StudentControllerTest {
                 .andExpect(jsonPath("$.id").value(1L));
     }
 
-
+    /**
+     * Test case for updating a student when it is not found.
+     *
+     * @throws Exception if an error occurs during the test
+     */
     @Test
     void updateStudentTest_NotFound() throws Exception {
         when(studentService.updateStudent(eq(999L), any(Student.class))).thenReturn(Optional.empty());

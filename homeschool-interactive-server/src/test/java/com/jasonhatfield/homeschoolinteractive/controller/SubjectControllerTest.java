@@ -22,6 +22,9 @@ import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+/**
+ * Unit tests for the SubjectController class.
+ */
 @ExtendWith(MockitoExtension.class)
 class SubjectControllerTest {
 
@@ -38,6 +41,11 @@ class SubjectControllerTest {
         mockMvc = MockMvcBuilders.standaloneSetup(subjectController).build();
     }
 
+    /**
+     * Test case for getting all subjects.
+     *
+     * @throws Exception if an error occurs during the test
+     */
     @Test
     void getAllSubjectsTest() throws Exception {
         Subject subject1 = new Subject();
@@ -61,6 +69,11 @@ class SubjectControllerTest {
         verify(subjectService).getAllSubjects();
     }
 
+    /**
+     * Test case for getting a subject by ID.
+     *
+     * @throws Exception if an error occurs during the test
+     */
     @Test
     void getSubjectByIdTest_Success() throws Exception {
         Subject subject = new Subject();
@@ -77,6 +90,11 @@ class SubjectControllerTest {
         verify(subjectService).getSubjectById(1L);
     }
 
+    /**
+     * Test case for getting a subject by ID when it is not found.
+     *
+     * @throws Exception if an error occurs during the test
+     */
     @Test
     void getSubjectByIdTest_NotFound() throws Exception {
         when(subjectService.getSubjectById(anyLong())).thenReturn(Optional.empty());
@@ -87,6 +105,11 @@ class SubjectControllerTest {
         verify(subjectService).getSubjectById(anyLong());
     }
 
+    /**
+     * Test case for creating a subject.
+     *
+     * @throws Exception if an error occurs during the test
+     */
     @Test
     void createSubjectTest_Success() throws Exception {
         Subject subject = new Subject();
@@ -105,6 +128,11 @@ class SubjectControllerTest {
         verify(subjectService).saveSubject(any(Subject.class));
     }
 
+    /**
+     * Test case for deleting a subject.
+     *
+     * @throws Exception if an error occurs during the test
+     */
     @Test
     void deleteSubjectTest_Success() throws Exception {
         doNothing().when(subjectService).deleteSubject(1L);
@@ -115,6 +143,11 @@ class SubjectControllerTest {
         verify(subjectService).deleteSubject(1L);
     }
 
+    /**
+     * Test case for updating a subject.
+     *
+     * @throws Exception if an error occurs during the test
+     */
     @Test
     void updateSubjectTest_Success() throws Exception {
         Subject updatedSubject = new Subject();
@@ -133,6 +166,11 @@ class SubjectControllerTest {
         verify(subjectService).updateSubject(eq(1L), any(Subject.class));
     }
 
+    /**
+     * Test case for updating a subject when it is not found.
+     *
+     * @throws Exception if an error occurs during the test
+     */
     @Test
     void updateSubjectTest_NotFound() throws Exception {
         when(subjectService.updateSubject(eq(999L), any(Subject.class))).thenReturn(Optional.empty());

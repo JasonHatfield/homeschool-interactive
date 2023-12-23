@@ -16,6 +16,9 @@ import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+/**
+ * This class contains unit tests for the RegistrationController class.
+ */
 @ExtendWith(MockitoExtension.class)
 class RegistrationControllerTest {
 
@@ -32,10 +35,13 @@ class RegistrationControllerTest {
         mockMvc = MockMvcBuilders.standaloneSetup(registrationController).build();
     }
 
+    /**
+     * Test case for registering a user successfully.
+     *
+     * @throws Exception if an error occurs during the test
+     */
     @Test
     void registerUser_Success() throws Exception {
-        User sampleUser = new User("username", "password", "ROLE_USER");
-
         mockMvc.perform(post("/api/register")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("{\"username\":\"username\", \"password\":\"password\", \"role\":\"ROLE_USER\"}"))

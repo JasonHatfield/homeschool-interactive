@@ -15,6 +15,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+/**
+ * Unit tests for the UserController class.
+ */
 @ExtendWith(MockitoExtension.class)
 class UserControllerTest {
 
@@ -31,6 +34,11 @@ class UserControllerTest {
         mockMvc = MockMvcBuilders.standaloneSetup(userController).build();
     }
 
+    /**
+     * Test case for deleting a user when the user exists.
+     *
+     * @throws Exception if an error occurs during the test
+     */
     @Test
     void deleteUserTest_Success() throws Exception {
         String username = "existingUser";
@@ -43,6 +51,11 @@ class UserControllerTest {
         verify(userService).deleteUserByUsername(username);
     }
 
+    /**
+     * Test case for deleting a user when the user does not exist.
+     *
+     * @throws Exception if an error occurs during the test
+     */
     @Test
     void deleteUserTest_NotFound() throws Exception {
         String username = "nonExistingUser";
@@ -54,6 +67,11 @@ class UserControllerTest {
         verify(userService, never()).deleteUserByUsername(username);
     }
 
+    /**
+     * Test case for deleting a user with an invalid username.
+     *
+     * @throws Exception if an error occurs during the test
+     */
     @Test
     void deleteUserTest_InvalidUsername() throws Exception {
         String invalidUsername = "invalidUser";

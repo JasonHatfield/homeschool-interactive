@@ -1,3 +1,9 @@
+/**
+ * This package contains the main application class for the Homeschool Interactive project.
+ * 
+ * This project is the original work of Jason Hatfield.
+ * 
+ */
 package com.jasonhatfield.homeschoolinteractive;
 
 import org.springframework.boot.SpringApplication;
