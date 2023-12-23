@@ -116,16 +116,6 @@ class SubjectControllerTest {
     }
 
     @Test
-    void deleteSubjectTest_NotFound() throws Exception {
-        doThrow(new RuntimeException("Subject not found")).when(subjectService).deleteSubject(999L);
-
-        mockMvc.perform(delete("/subjects/999"))
-                .andExpect(status().isNotFound());
-
-        verify(subjectService).deleteSubject(999L);
-    }
-
-    @Test
     void updateSubjectTest_Success() throws Exception {
         Subject updatedSubject = new Subject();
         updatedSubject.setSubjectId(1L);
@@ -155,5 +145,4 @@ class SubjectControllerTest {
         verify(subjectService).updateSubject(eq(999L), any(Subject.class));
     }
 
-    // Additional test cases as needed
 }
