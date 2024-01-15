@@ -1,41 +1,42 @@
-1. Backend Development:
-   - [x] Create Entity Classes: Map your database tables to Java classes using JPA annotations.
-   - [x] Create Repository Interfaces: Extend JpaRepository for each entity to handle CRUD operations.
-   - [x] Develop Services: Implement the business logic of your application within service classes.
-   - [x] Define Controllers: Create REST controllers to handle HTTP requests and respond with JSON data. 
-   - [x] Data Validation: Implement validation for incoming data to maintain data integrity. 
-   - [x] Exception Handling: Define global or controller-specific exception handlers for consistent error responses. 
+# System Administrator Guide for Homeschool Interactive System
 
-2. Frontend Development:
-   - [ ] Component Creation: Develop React components for each part of your UI.
-   - [ ] State Management: Decide on a state management approach (Context API, Redux, etc.) for your React app.
-   - [ ] API Integration: Use Axios or Fetch API to connect your React components to the backend endpoints.
-   - [ ] Routing: Set up client-side routing with React Router for navigating between different views.
-   - [ ] User Interface: Enhance the UI using a CSS framework like Bootstrap, or consider CSS-in-JS solutions for styling.
-   - [ ] Form Handling: Implement forms for submitting and editing assignments, students, and subjects.
-   - [ ] Data Display: Create tables and lists to display assignments and subjects, along with filtering and sorting functionality.
-   - [ ] Validation and Feedback: Provide form validation feedback and display messages for API responses.
+## Purpose and Audience
+This guide is intended for system administrators of the Homeschool Interactive system. It aims to provide detailed instructions on managing the technical and administrative aspects of the platform.
 
-3. Testing:
-   - [ ] Unit Testing: Write unit tests for both backend and frontend logic to ensure individual components work as expected.
-   - [ ] Integration Testing: Test API endpoints to ensure they work correctly with the database.
-   - [ ] End-to-End Testing: Simulate user workflows to ensure the entire application works as expected.
-   - [ ] Performance Testing: Test the application under load to ensure it can handle the expected user traffic.
+## System Requirements and Setup
+- **Server Requirements**: Ensure that the server meets the minimum hardware requirements: modern multi-core CPU, at least 8GB RAM, and adequate storage.
+- **Database Configuration**: Set up a MySQL database. Ensure it is properly connected to the backend server with appropriate credentials.
+- **Environment Setup**: Install Node.js for the frontend and Java (Spring Boot) for the backend. Configure environment variables as required.
 
-4. Security:
-   - [ ] Secure Endpoints: Even though authentication isn't implemented yet, ensure your API endpoints are secure.
-   - [ ] Data Encryption: Ensure sensitive data in transit and at rest is encrypted.
-   - [ ] Dependency Checks: Regularly check for and update dependencies to secure versions.
+## Deployment Instructions
+1. **Backend Deployment**:
+   - Compile the Spring Boot application.
+   - Deploy the JAR file to a web server or cloud platform.
+2. **Frontend Deployment**:
+   - Build the React application using `npm run build`.
+   - Host the build on a web server or a service like Netlify or Vercel.
+3. **Database Migration**:
+   - Run any pending migrations to set up the database schema.
 
-5. Deployment:
-   - [ ] Choose a Deployment Platform: Select a cloud provider like AWS, Azure, or a hosting platform that supports Java and Node.js applications.
-   - [ ] CI/CD Pipeline: Set up a continuous integration and deployment pipeline to automate the deployment process.
-   - [ ] Monitoring and Logging: Implement monitoring and logging to track the application's health and user activities.
+## Maintenance and Upgrades
+- Regularly update the software dependencies.
+- Monitor server performance and scalability.
+- Implement regular database backups and test restoration processes.
+- Schedule periodic system audits for security and performance.
 
-6. Documentation:
-   - [ ] Developer Documentation: Document the codebase to help new developers understand the project.
-   - [ ] User Documentation: Write user manuals or help guides for end-users to navigate and use the application effectively.
+## Security Protocols
+- Ensure HTTPS is enabled for secure communication.
+- Regularly update SSL certificates.
+- Implement and enforce strong password policies.
+- Use JWT tokens for authentication and ensure their secure handling.
+- Regularly update and audit security configurations to prevent vulnerabilities.
 
-7. User Feedback:
-   - [ ] Beta Testing: Release the application to a limited user base to gather feedback.
-   - [ ] Iterate Based on Feedback: Make improvements and enhancements based on user suggestions and bug reports.
+## Troubleshooting Common Issues
+- **Server Downtime**: Check server logs for errors. Restart the server if necessary.
+- **Database Connectivity Issues**: Verify database credentials and connection strings.
+- **Performance Issues**: Monitor server resources and scale up if needed.
+
+## Additional Tips
+- Keep documentation up-to-date with system changes.
+- Train backup administrators to handle the system in your absence.
+- Stay informed about the latest security best practices and apply them to the system.
